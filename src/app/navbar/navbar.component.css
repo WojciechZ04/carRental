@@ -6,11 +6,3 @@
 .navbar-scrolled {
 	background-color: rgba(0, 0, 0, 1);
 }
-
-.navbar-brand {
-    position: relative;
-    padding: 10px 15px;
-    color: #fff;
-    text-decoration: none;
-    z-index: 2; /* Dodano z-index, aby przyciski były na wierzchu gradientu */
-}

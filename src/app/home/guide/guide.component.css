@@ -1,0 +1,16 @@
+.container {
+	padding: 10% 0;
+}
+
+.row {
+	padding: 20px 0;
+}
+
+.card {
+	padding: 10% 0;
+	background-color: gray;
+}
+
+.card p, h3 {
+	padding-top: 20px;
+}
