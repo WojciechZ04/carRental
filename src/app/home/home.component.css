@@ -1,0 +1,11 @@
+#header {
+	background-size: cover;
+  	background-position: center; /* Opcjonalnie: ustawienie pozycji obrazu w tle na środek */
+ 	width: 100%; /* Ustawienie szerokości diva na 100% */
+  	height: 100vh;
+	background-image: url(../images/home.jpg);
+}
+
+#tutorial {
+	height: 200vh;
+}
