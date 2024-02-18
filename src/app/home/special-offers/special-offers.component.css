@@ -1,0 +1,52 @@
+.row {
+	margin-bottom: 400px;
+}
+
+.specialCard {
+	padding: 0;
+	position: absolute; 
+    z-index: 1; 
+    background-size: cover; 
+    background-position: center; 
+    height: 50vh; 
+	width: 50%;
+    display: inline; 
+	transition: width 0.3s, filter 0.3s;
+}
+
+.specialCard:nth-child(1) {
+	left: 0; 
+	background-image: url('https://www.autocentrum.pl/MmYyLmpwYgw4GzpeXwxvGHtDbkIRFGALMBUpQhMWP0AvHD4eGRgjQmwaKFRGQysLOk54D0NCfg44SHxbFUUrX3cTPApSCg');
+}
+.specialCard:nth-child(2) {
+	right: 0; 
+	background-image: url('https://kprcenter.rentcarsoft.pl/grafiki/oferta/655f46b39e975.jpg');
+}
+.specialCard:nth-child(3) {
+	left: 50%; 
+	transform: translateX(-50%); 
+	background-image: url('https://is-ak.bnm.pl/04/o/o/31/5170207.jpg?v=1689773126');
+}
+
+.specialCard img {
+	height: 700px;
+	position: absolute;
+}
+
+.hidden {
+	display: none;
+}
+
+.specialCard:hover .hidden {
+	display: block;
+}
+
+.container:hover .specialCard {
+    width: 30%; /* Shrink all cards on hover */
+    filter: brightness(30%); /* Darken all cards on hover */
+}
+
+.container:hover .specialCard:hover {
+    width: 70%; /* Expand hovered card on hover */
+    filter: brightness(70%); /* Brighten hovered card on hover */
+}
