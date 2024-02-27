@@ -11,7 +11,7 @@
     height: 50vh; 
 	width: 50%;
     display: inline; 
-	transition: width 0.3s, filter 0.3s;
+	transition: width 0.7s, filter 0.7s;
 }
 
 .specialCard:nth-child(1) {
@@ -20,7 +20,7 @@
 }
 .specialCard:nth-child(2) {
 	right: 0; 
-	background-image: url('https://kprcenter.rentcarsoft.pl/grafiki/oferta/655f46b39e975.jpg');
+	background-image: url('https://is-ak.bnm.pl/04/o/o/31/5170207.jpg?v=1689773126');
 }
 .specialCard:nth-child(3) {
 	left: 50%; 
@@ -48,5 +48,5 @@
 
 .container:hover .specialCard:hover {
     width: 70%; /* Expand hovered card on hover */
-    filter: brightness(70%); /* Brighten hovered card on hover */
+    filter: brightness(100%); /* Brighten hovered card on hover */
 }
