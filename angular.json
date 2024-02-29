@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "carRental:build:production"
+              "buildTarget": "carRental:build:production"
             },
             "development": {
-              "browserTarget": "carRental:build:development"
+              "buildTarget": "carRental:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "carRental:build"
+            "buildTarget": "carRental:build"
           }
         },
         "test": {

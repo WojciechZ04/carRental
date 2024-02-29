@@ -1,0 +1,13 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.container {
+	padding-top: 200px;
+}
+
+.mat-stepper-vertical {
+	margin-top: 8px;
+}
+  
+.mat-mdc-form-field {
+	margin-top: 16px;
+}
