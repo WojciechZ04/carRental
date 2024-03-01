@@ -1,4 +1,59 @@
 <div class="container">
   <h2>Booking</h2>
-  <router-outlet></router-outlet>
+  <div class="row">
+    <div *ngIf="currentStep !== 1" class="test col-md-4">
+      <div>test1</div>
+    </div>
+    <div class="col-md-8 test">
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        
+        <!--step 1-->
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Select car and date</ng-template>
+            <router-outlet></router-outlet>
+          </form>
+        </mat-step>
+
+        <!--step 2-->
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Choose </ng-template>
+            <mat-form-field>
+              <input matInput placeholder="Address" formControlName="secondCtrl" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!--step 3-->
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field>
+              <input matInput placeholder="Address" formControlName="secondCtrl" required>
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!--step 4-->
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+      <button (click)="onBack()">Back</button>
+      <button (click)="onNext()">Next</button>
+    </div>
 </div>

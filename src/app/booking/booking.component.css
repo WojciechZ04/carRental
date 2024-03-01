@@ -11,3 +11,9 @@
 .mat-mdc-form-field {
 	margin-top: 16px;
 }
+
+.test {
+	border-style: solid;
+	border-color: azure;
+	border-width: 1px;
+}
