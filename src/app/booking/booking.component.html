@@ -6,74 +6,8 @@
     </div>
     
     <div class="col-md-8 test">
-      <mat-stepper [linear]="isLinear" #stepper>
-
-        <!-- Step 1 -->
-        <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Select date and car</ng-template>
-            <mat-form-field>
-              <mat-label>Enter a date range</mat-label>
-              <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                <input
-                  matStartDate
-                  formControlName="start"
-                  placeholder="Start date"
-                />
-                <input
-                  matEndDate
-                  formControlName="end"
-                  placeholder="End date"
-                />
-              </mat-date-range-input>
-              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle
-                matIconSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-date-range-picker #picker></mat-date-range-picker>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Choose an option</mat-label>
-              <mat-select [disabled]="disableSelect.value">
-                <mat-option value="option1">Car 1</mat-option>
-                <mat-option value="option2" disabled>Car 2</mat-option>
-                <mat-option value="option3">Car 3</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperNext (click)="onNext()">Next</button>
-            </div>
-          </form>
-        </mat-step>
-
-        <!-- Step 2 -->
-        <mat-step [stepControl]="secondFormGroup" label="Select extras">
-          <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-              <mat-label>Address</mat-label>
-              <input
-                matInput
-                formControlName="secondCtrl"
-                placeholder="Ex. 1 Main St, New York, NY"
-                required
-              />
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-          </div>
-        </mat-step>
-      </mat-stepper>
+      <div>Step {{currentStep}}</div>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
