@@ -16,7 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -36,12 +38,11 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatFormFieldModule,
     MatDatepickerModule,
-    FormsModule,
-    ReactiveFormsModule,
     JsonPipe,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    MatCheckboxModule,
   ],
   providers: [provideNativeDateAdapter()],
 })

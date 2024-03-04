@@ -1,2 +1,33 @@
-<p>car-selection works!</p>
-<button (click)="onNext()">Next</button>
+<div class="container">
+  <form [formGroup]="form">
+    <mat-form-field class="element">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date" />
+        <input matEndDate formControlName="end" placeholder="End date" />
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <mat-form-field class="element">
+      <mat-label>Choose an option</mat-label>
+      <mat-select
+        formControlName="car"
+        [disabled]="true"
+      >
+        <mat-option value="option1">Option 1</mat-option>
+        <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+        <mat-option value="option3">Option 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="element" [disabled]="!form.valid" (click)="onNext()">
+      Next
+    </button>
+  </form>
+</div>

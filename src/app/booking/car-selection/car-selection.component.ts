@@ -1,13 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+
 
 @Component({
   selector: 'app-car-selection',
   templateUrl: './car-selection.component.html',
-  styleUrl: './car-selection.component.css'
+  styleUrl: './car-selection.component.css',
 })
-export class CarSelectionComponent {
-  constructor(private route: ActivatedRoute, private router: Router) {}
+export class CarSelectionComponent implements OnInit{
+  form!: FormGroup;
+
+  constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+      this.form = this.formBuilder.group({
+        'start': ['', Validators.required],
+        'end': ['', Validators.required],
+        'car': ['', Validators.required],
+      });
+  }
 
   onNext() {
     this.router.navigate(['../extras'], { relativeTo: this.route });
