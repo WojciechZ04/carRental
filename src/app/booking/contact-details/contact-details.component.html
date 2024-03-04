@@ -1,0 +1,32 @@
+<div class="container">
+  <form [formGroup]="contactForm">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select</mat-label>
+      <mat-select>
+        <mat-option value="one">First option</mat-option>
+        <mat-option value="two">Second option</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Textarea</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+    <button (click)="onBack()">Back</button>
+    <button [disabled]="!contactForm.valid" (click)="onNext()">Next</button>
+  </form>
+</div>
