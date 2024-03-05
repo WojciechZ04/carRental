@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import { filter } from 'rxjs';
+import { BookingService } from './booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -8,9 +11,20 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class BookingComponent implements OnInit {
   currentStep = 0;
+  formData: any;
 
-  constructor(private router: Router) {}
+  handleFormSubmit(form: FormGroup) {
+    this.formData = form.value;
+    console.log(form.value);
+  }
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private bookingService: BookingService) {}
+  
   ngOnInit() {
+    this.bookingService.formSubmit$.subscribe((form) => {
+      this.formData = form.value;
+    });
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects.includes('car-selection')) {
