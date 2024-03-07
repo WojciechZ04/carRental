@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
+import {
+  Router,
+  NavigationEnd,
+  NavigationStart,
+} from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { BookingService } from './booking.service';
+import { FormDirtyService } from '../services/form-dirty.service';
 
 @Component({
   selector: 'app-booking',
@@ -17,17 +22,26 @@ export class BookingComponent implements OnInit {
     console.log(form.value);
   }
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private bookingService: BookingService) {}
-  
+  constructor(
+    private router: Router,
+    private bookingService: BookingService,
+    private formDirtyService: FormDirtyService
+  ) {}
+
   ngOnInit() {
-    this.bookingService.formSubmit$.subscribe(formData => {
+    this.bookingService.formSubmit$.subscribe((formData) => {
       this.formData = formData;
     });
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        const bookingSteps = ['car-selection', 'extras', 'contact-details', 'payment'];
-        if (!bookingSteps.some(step => event.url.includes(step))) {
+        const bookingSteps = [
+          'car-selection',
+          'extras',
+          'contact-details',
+          'payment',
+        ];
+        if (!bookingSteps.some((step) => event.url.includes(step))) {
           this.bookingService.formData = {}; // Reset the form data
         }
       }
@@ -50,6 +64,13 @@ export class BookingComponent implements OnInit {
     if (storedStep) {
       this.currentStep = Number(storedStep);
     }
+  }
+
+  canDeactivate(): boolean {
+    if (this.formDirtyService.isDirty) {
+      return window.confirm('You have unsaved changes. Are you sure you want to abandon the booking?');
+    }
+    return true;
   }
 
   onTest() {

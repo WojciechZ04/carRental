@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BookingService } from '../booking.service';
+import { FormDirtyService } from '../../services/form-dirty.service';
 
 @Component({
   selector: 'app-car-selection',
@@ -20,12 +21,16 @@ export class CarSelectionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private formDirtyService: FormDirtyService
   ) {}
 
   ngOnInit(): void {
     this.bookingService.resetForm$.subscribe(() => {
       this.carSelectionForm.reset();
+    });
+    this.carSelectionForm.valueChanges.subscribe(() => {
+      this.formDirtyService.isDirty = this.carSelectionForm.dirty;
     });
   }
 

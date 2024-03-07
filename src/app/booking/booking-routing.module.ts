@@ -6,11 +6,13 @@ import { CarSelectionComponent } from "./car-selection/car-selection.component";
 import { ContactDetailsComponent } from "./contact-details/contact-details.component";
 import { ExtrasComponent } from "./extras/extras.component";
 import { PaymentComponent } from "./payment/payment.component";
+import { canDeactivateGuard } from "../guards/can-deactivate.guard";
 
 const routes: Routes = [
   {
 	path: "",
 	component: BookingComponent,
+	canDeactivate: [canDeactivateGuard],
 	children: [
 	  { path: "car-selection", component: CarSelectionComponent },
 	  { path: "extras", component: ExtrasComponent },
