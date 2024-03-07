@@ -9,7 +9,17 @@ export class BookingService {
   private formSubmitSource = new Subject<any>();
   formSubmit$ = this.formSubmitSource.asObservable();
 
+  private resetFormSource = new Subject<void>();
+  resetForm$ = this.resetFormSource.asObservable();
+
+  formData: any = {};
+
   formSubmitted(form: any) {
-    this.formSubmitSource.next(form);
+    this.formData = { ...this.formData, ...form.value };
+    this.formSubmitSource.next(this.formData);
+  }
+
+  resetForm() {
+    this.resetFormSource.next();
   }
 }

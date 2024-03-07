@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { filter } from 'rxjs';
 import { BookingService } from './booking.service';
 
 @Component({
@@ -21,11 +20,18 @@ export class BookingComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private bookingService: BookingService) {}
   
   ngOnInit() {
-    this.bookingService.formSubmit$.subscribe((form) => {
-      this.formData = form.value;
+    this.bookingService.formSubmit$.subscribe(formData => {
+      this.formData = formData;
     });
 
     this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        const bookingSteps = ['car-selection', 'extras', 'contact-details', 'payment'];
+        if (!bookingSteps.some(step => event.url.includes(step))) {
+          this.bookingService.formData = {}; // Reset the form data
+        }
+      }
+
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects.includes('car-selection')) {
           this.currentStep = 1;
@@ -44,5 +50,9 @@ export class BookingComponent implements OnInit {
     if (storedStep) {
       this.currentStep = Number(storedStep);
     }
+  }
+
+  onTest() {
+    console.log(this.bookingService.formData);
   }
 }

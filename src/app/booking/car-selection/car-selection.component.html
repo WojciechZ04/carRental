@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="form">
+  <form [formGroup]="carSelectionForm" (ngSubmit)="onNext()">
     <mat-form-field class="element">
       <mat-label>Enter a date range</mat-label>
       <mat-date-range-input [rangePicker]="picker">
@@ -26,7 +26,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button class="element" [disabled]="!form.valid" (click)="onNext()">
+    <button class="element" [disabled]="!carSelectionForm.valid" type="submit">
       Next
     </button>
   </form>

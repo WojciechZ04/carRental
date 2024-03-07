@@ -1,11 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BookingService } from '../booking.service';
 
 @Component({
   selector: 'app-car-selection',
@@ -13,29 +9,29 @@ import {
   styleUrl: './car-selection.component.css',
 })
 export class CarSelectionComponent implements OnInit {
-  form!: FormGroup;
+  @Output() formSubmit = new EventEmitter<FormGroup>();
+
+  carSelectionForm = new FormGroup({
+    start: new FormControl('', Validators.required),
+    end: new FormControl('', Validators.required),
+    car: new FormControl('', Validators.required),
+  });
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private bookingService: BookingService
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      start: ['', Validators.required],
-      end: ['', Validators.required],
-      car: ['', Validators.required],
+    this.bookingService.resetForm$.subscribe(() => {
+      this.carSelectionForm.reset();
     });
   }
 
   onNext() {
-    console.log(this.form.value.car);
-    console.log(this.form.value.start);
-    console.log(this.form.value.end);
-    
-    
-    if(this.form.valid) {
+    if (this.carSelectionForm.valid) {
+      this.bookingService.formSubmitted(this.carSelectionForm);
       this.router.navigate(['../extras'], { relativeTo: this.route });
     }
   }

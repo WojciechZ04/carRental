@@ -4,12 +4,17 @@
     <div class="test col-md-4">
       <mat-card>
         <h3>Booking summary</h3>
-        <div *ngIf="formData">
+        <div *ngIf="formData?.start">
+          <h4>Pick up</h4>
+          <p>{{formData?.start | date: 'short'}}</p>
+          <p>Warsaw</p>
+        </div>
+        <div *ngIf="formData?.firstName">
           <h4>Contact</h4>
-          <p>{{formData.firstName}}</p>
+          <p>{{formData?.firstName}}</p>
         </div>
       </mat-card>
-      <button>Test</button>
+      <button (click)="onTest()">Test</button>
     </div>
 
     <div class="col-md-8 test">
