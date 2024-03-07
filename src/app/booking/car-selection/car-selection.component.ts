@@ -26,11 +26,18 @@ export class CarSelectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // If the form data is available, populate the form with the data
+    if (this.bookingService.formData.carSelection) {
+      this.carSelectionForm.setValue(this.bookingService.formData.carSelection);
+    }
+    this.carSelectionForm.valueChanges.subscribe(formData => {
+      this.bookingService.formData.carSelection = formData;
+      this.formDirtyService.isDirty = this.carSelectionForm.dirty;
+    });
+    
+    // Reset the form when the resetForm$ event is emitted
     this.bookingService.resetForm$.subscribe(() => {
       this.carSelectionForm.reset();
-    });
-    this.carSelectionForm.valueChanges.subscribe(() => {
-      this.formDirtyService.isDirty = this.carSelectionForm.dirty;
     });
   }
 
