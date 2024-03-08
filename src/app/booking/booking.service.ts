@@ -14,8 +14,8 @@ export class BookingService {
 
   formData: any = {};
 
-  formSubmitted(form: any) {
-    this.formData = { ...this.formData, ...form.value };
+  formSubmitted(key: string, form: any) {
+    this.formData[key] = form.value;
     this.formSubmitSource.next(this.formData);
   }
 

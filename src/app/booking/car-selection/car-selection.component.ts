@@ -31,7 +31,6 @@ export class CarSelectionComponent implements OnInit {
       this.carSelectionForm.setValue(this.bookingService.formData.carSelection);
     }
     this.carSelectionForm.valueChanges.subscribe(formData => {
-      this.bookingService.formData.carSelection = formData;
       this.formDirtyService.isDirty = this.carSelectionForm.dirty;
     });
     
@@ -43,7 +42,7 @@ export class CarSelectionComponent implements OnInit {
 
   onNext() {
     if (this.carSelectionForm.valid) {
-      this.bookingService.formSubmitted(this.carSelectionForm);
+      this.bookingService.formSubmitted('carSelection', this.carSelectionForm);
       this.router.navigate(['../extras'], { relativeTo: this.route });
     }
   }

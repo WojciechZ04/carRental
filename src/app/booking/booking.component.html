@@ -4,14 +4,22 @@
     <div class="test col-md-4">
       <mat-card>
         <h3>Booking summary</h3>
-        <div *ngIf="formData?.start">
+        <div *ngIf="formData?.carSelection">
           <h4>Pick up</h4>
-          <p>{{formData?.start | date: 'short'}}</p>
+          <p>{{formData?.carSelection.start | date: 'short'}}</p>
           <p>Warsaw</p>
         </div>
-        <div *ngIf="formData?.firstName">
+        <div *ngIf="formData?.extras">
+          <h4>Extras</h4>
+          <ul>
+            <li *ngFor="let extra of formData.extras | keyvalue">
+              <span *ngIf="extra.value">{{ extra.key }}</span>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="formData?.contactDetails">
           <h4>Contact</h4>
-          <p>{{formData?.firstName}}</p>
+          <p>{{formData?.contactDetails.firstName}}</p>
         </div>
       </mat-card>
       <button (click)="onTest()">Test</button>

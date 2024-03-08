@@ -28,10 +28,6 @@ export class ContactDetailsComponent implements OnInit {
     if (this.bookingService.formData.contactDetails) {
       this.contactForm.setValue(this.bookingService.formData.contactDetails);
     }
-    this.contactForm.valueChanges.subscribe(formData => {
-      this.bookingService.formData.contactDetails = formData;
-      this.formDirtyService.isDirty = this.contactForm.dirty;
-    });
 
     // Reset the form when the resetForm$ event is emitted
     this.bookingService.resetForm$.subscribe(() => {
@@ -44,7 +40,7 @@ export class ContactDetailsComponent implements OnInit {
   }
   onNext() {
     if (this.contactForm.valid) {
-      this.bookingService.formSubmitted(this.contactForm);
+      this.bookingService.formSubmitted('contactDetails', this.contactForm);
       this.router.navigate(['../payment'], { relativeTo: this.route });
     }
   }
