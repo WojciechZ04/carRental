@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
-
 export class BookingService {
+  steps = ['car-selection', 'extras', 'contact-details', 'payment']; // Add as many steps as you have
+
   private formSubmitSource = new Subject<any>();
   formSubmit$ = this.formSubmitSource.asObservable();
 
@@ -21,5 +22,21 @@ export class BookingService {
 
   resetForm() {
     this.resetFormSource.next();
+  }
+
+  canNavigateToStep(step: string): boolean {
+    if (step === 'car-selection') {
+      // The user can always navigate to the first step
+      return true;
+    } else if (step === 'extras' && this.formData['carSelection']) {
+      // The user cannot navigate to other steps if the carSelection form is not valid
+      return true;
+    } else if (step === 'contact-details' && this.formData['extras']) {
+      return true;
+    } else if (step === 'payment' && this.formData['contactDetails']) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

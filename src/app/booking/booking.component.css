@@ -16,6 +16,17 @@
 	border-style: solid;
 	border-color: azure;
 	border-width: 1px;
-	color: black;
+	color: blue;
 }
 
+.stepper li {
+	display: inline-block;
+	margin-right: 10px;
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+  }
+  
+  .stepper li.active {
+	background-color: #ccc;
+  }

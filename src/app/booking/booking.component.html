@@ -12,9 +12,9 @@
         <div *ngIf="formData?.extras">
           <h4>Extras</h4>
           <ul>
-            <li *ngFor="let extra of formData.extras | keyvalue">
-              <span *ngIf="extra.value">{{ extra.key }}</span>
-            </li>
+            <ng-container *ngFor="let extra of formData.extras | keyvalue">
+              <li *ngIf="extra.value">{{ extra.key }}</li>
+            </ng-container>
           </ul>
         </div>
         <div *ngIf="formData?.contactDetails">
@@ -24,9 +24,12 @@
       </mat-card>
       <button (click)="onTest()">Test</button>
     </div>
-
     <div class="col-md-8 test">
-      <div>Step {{ currentStep }}</div>
+      <ul class="stepper">
+        <li *ngFor="let step of steps; index as i" [routerLink]="['/booking', step]" routerLinkActive="active">
+          {{ step }}
+        </li>
+      </ul>
       <router-outlet></router-outlet>
     </div>
   </div>

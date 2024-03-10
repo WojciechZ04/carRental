@@ -4,7 +4,6 @@ import {
   NavigationEnd,
   NavigationStart,
 } from '@angular/router';
-import { FormGroup } from '@angular/forms';
 import { BookingService } from './booking.service';
 import { FormDirtyService } from '../services/form-dirty.service';
 
@@ -14,13 +13,9 @@ import { FormDirtyService } from '../services/form-dirty.service';
   styleUrls: ['./booking.component.css'],
 })
 export class BookingComponent implements OnInit {
+  steps: string[];
   currentStep = 0;
   formData: any;
-
-  handleFormSubmit(form: FormGroup) {
-    this.formData = form.value;
-    console.log(form.value);
-  }
 
   constructor(
     private router: Router,
@@ -29,6 +24,8 @@ export class BookingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.steps = this.bookingService.steps;
+
     this.bookingService.formSubmit$.subscribe((formData) => {
       this.formData = formData;
     });
