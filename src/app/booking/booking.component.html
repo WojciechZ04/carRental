@@ -2,12 +2,20 @@
   <h2>Booking</h2>
   <div class="row">
     <div class="test col-md-4">
-      <mat-card>
+      <!-- Booking summary -->
+      <mat-card *ngIf="formData">
         <h3>Booking summary</h3>
         <div *ngIf="formData?.carSelection">
           <h4>Pick up</h4>
-          <p>{{formData?.carSelection.start | date: 'short'}}</p>
+          <p>{{ formData?.carSelection.start | date : "short" }}</p>
           <p>Warsaw</p>
+
+          <h4>Drop off</h4>
+          <p>{{ formData?.carSelection.end | date : "short" }}</p>
+          <p>Warsaw</p>
+
+          <h4>Car</h4>
+          <p>{{ formData?.carSelection.car }}</p>
         </div>
         <div *ngIf="formData?.extras">
           <h4>Extras</h4>
@@ -19,14 +27,29 @@
         </div>
         <div *ngIf="formData?.contactDetails">
           <h4>Contact</h4>
-          <p>{{formData?.contactDetails.firstName}}</p>
+          <p>{{ formData?.contactDetails.firstName }}</p>
+        </div>
+
+        <div>
+          <h2>Total price: {{totalPrice}}</h2>
         </div>
       </mat-card>
+
+      <!-- Filters -->
+      <mat-card *ngIf="!formData">
+        <h3>Filters</h3>
+      </mat-card>
+
+      <!-- Testing button for displaying forms values -->
       <button (click)="onTest()">Test</button>
     </div>
     <div class="col-md-8 test">
       <ul class="stepper">
-        <li *ngFor="let step of steps; index as i" [routerLink]="['/booking', step]" routerLinkActive="active">
+        <li
+          *ngFor="let step of steps; index as i"
+          [routerLink]="['/booking', step]"
+          routerLinkActive="active"
+        >
           {{ step }}
         </li>
       </ul>

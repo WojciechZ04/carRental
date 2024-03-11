@@ -16,6 +16,7 @@ export class BookingComponent implements OnInit {
   steps: string[];
   currentStep = 0;
   formData: any;
+  totalPrice: number;
 
   constructor(
     private router: Router,
@@ -29,6 +30,8 @@ export class BookingComponent implements OnInit {
     this.bookingService.formSubmit$.subscribe((formData) => {
       this.formData = formData;
     });
+
+
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -48,8 +51,10 @@ export class BookingComponent implements OnInit {
           this.currentStep = 1;
         } else if (event.urlAfterRedirects.includes('extras')) {
           this.currentStep = 2;
+          this.totalPrice = this.bookingService.formData.carSelection.price;
         } else if (event.urlAfterRedirects.includes('contact-details')) {
           this.currentStep = 3;
+          this.totalPrice = this.totalPrice + this.bookingService.formData.extras.totalPrice;
         } else if (event.urlAfterRedirects.includes('payment')) {
           this.currentStep = 4;
         }
