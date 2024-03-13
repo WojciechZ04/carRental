@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { BookingService } from './booking.service';
 import { FormDirtyService } from '../services/form-dirty.service';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-booking',
@@ -17,11 +18,13 @@ export class BookingComponent implements OnInit {
   currentStep = 0;
   formData: any;
   totalPrice: number;
+  cars: any;
 
   constructor(
     private router: Router,
     private bookingService: BookingService,
-    private formDirtyService: FormDirtyService
+    private formDirtyService: FormDirtyService,
+    private dataStorageService: DataStorageService
   ) {}
 
   ngOnInit() {
