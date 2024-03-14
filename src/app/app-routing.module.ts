@@ -6,6 +6,7 @@ const appRoutes: Routes = [
 	{ path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
 	{ path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
 	{ path: 'booking', loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule) },
+	{ path: 'cars', loadChildren: () => import('./cars/cars.module').then(m => m.CarsModule) },
 	{ path: 'contact', loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule) },
 	{ path: 'help', loadChildren: () => import('./help/help.module').then(m => m.HelpModule) },
 ]
