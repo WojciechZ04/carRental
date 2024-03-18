@@ -1,12 +1,12 @@
 [
   {
     "name": "Lamborghini Aventador",
-    "price": 1000,
+    "price": 100,
     "description": "The Lamborghini Aventador is a mid-engine sports car produced by the Italian automotive manufacturer Lamborghini. In keeping with Lamborghini tradition, the Aventador is named after a fighting bull. Aventador (pronounced [aβentaˈðoɾ]) earned the Trofeo de la Peña La Madroñera for its courage in the arena in Zaragoza, Spain, in 1993. Production of the Aventador was planned to be limited to 4,000 vehicles; however, in 2016, it achieved the 5,000 unit milestone. The molds used to make the carbon-fibre monocoque are expected to last 500 molds each and only 8 have been made. The car's shape borrows heavily from Lamborghini's limited-edition Reventón and their Estoque concept car. The Aventador was designed by Filippo Perini, Lamborghini's head of design, replacing the then ten-year-old Murciélago as Lamborghini's flagship model."
   },
   {
     "name": "Ferrari 458",
-    "price": 1200,
+    "price": 120,
     "description": "The Ferrari 458 Italia is a mid-engine sports car produced by the Italian automobile manufacturer Ferrari. The 458 replaced the F430, and was first officially unveiled at the 2009 Frankfurt Motor Show. It was succeeded by the 488, which was unveiled at the 2015 Geneva Motor Show. The 458 is powered by a 4,497 cc (4.5 L; 274.4 cu in) V8 engine of the 'Ferrari/Maserati' F136 engine family, producing 570 PS (419 kW; 562 hp) at 9,000 rpm (redline) and 540 N⋅m (398 lb⋅ft) at 6,000 rpm with 80% torque available at 3,250 rpm. The engine features direct fuel injection, which is a first for Ferrari mid-engine setups in its road cars."
   }
 ]

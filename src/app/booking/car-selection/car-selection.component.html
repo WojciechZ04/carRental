@@ -14,9 +14,10 @@
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
 
-    <mat-card *ngFor="let car of cars">
+    <mat-card *ngFor="let car of data">
       <h4>{{ car.name }}</h4>
       <p>{{ car.description }}</p>
+      <h3>{{ car.price }} $ per day</h3>
 
       <button (click)="onNext(car.name, car.price)">Book</button>
     </mat-card>
