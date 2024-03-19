@@ -12,18 +12,15 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 })
 export class CarSelectionComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<FormGroup>();
+  currentSortOption: string;
   data: any;
-  cars = [
-    { name: 'Car 1', description: 'Description of Car 1', price: 100},
-    { name: 'Car 2', description: 'Description of Car 2', price: 200},
-    { name: 'Car 3', description: 'Description of Car 3', price: 300},
-  ];
+  originalData: any;
 
   carSelectionForm = new FormGroup({
     start: new FormControl('', Validators.required),
     end: new FormControl('', Validators.required),
     car: new FormControl('', Validators.required),
-    price: new FormControl(null, Validators.required)
+    price: new FormControl(null, Validators.required),
   });
 
   constructor(
@@ -38,21 +35,30 @@ export class CarSelectionComponent implements OnInit {
     this.dataStorageService.getCars().subscribe(
       (data) => {
         this.data = data;
-        console.log(this.data);
+        this.originalData = data;
       },
       (error) => {
         console.error('Error:', error);
       }
     );
-    
+
+    this.dataStorageService.selectedOption.subscribe((selectedOption) => {
+      this.currentSortOption = selectedOption;
+      this.sortData(selectedOption);
+    });
+
+    this.dataStorageService.availabilityFilter.subscribe((isChecked) => {
+      this.filterData(isChecked);
+    });
+
     // If the form data is available, populate the form with the data
     if (this.bookingService.formData.carSelection) {
       this.carSelectionForm.setValue(this.bookingService.formData.carSelection);
     }
-    this.carSelectionForm.valueChanges.subscribe(formData => {
+    this.carSelectionForm.valueChanges.subscribe((formData) => {
       this.formDirtyService.isDirty = this.carSelectionForm.dirty;
     });
-    
+
     // Reset the form when the resetForm$ event is emitted
     this.bookingService.resetForm$.subscribe(() => {
       this.carSelectionForm.reset();
@@ -65,6 +71,27 @@ export class CarSelectionComponent implements OnInit {
     if (this.carSelectionForm.valid) {
       this.bookingService.formSubmitted('carSelection', this.carSelectionForm);
       this.router.navigate(['../extras'], { relativeTo: this.route });
+    }
+  }
+
+  sortData(selectedOption: string) {
+    if (selectedOption === 'price') {
+      this.data.sort((a, b) => a.price - b.price);
+    } else if (selectedOption === 'name') {
+      this.data.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (selectedOption === 'date') {
+      this.data.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+    }
+  }
+
+  filterData(isChecked: boolean) {
+    if (isChecked) {
+      this.data = this.originalData.filter((car) => car.available);
+    } else {
+      this.data = [...this.originalData];
+      this.sortData(this.currentSortOption);
     }
   }
 }

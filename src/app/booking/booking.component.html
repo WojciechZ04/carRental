@@ -31,14 +31,26 @@
         </div>
 
         <div>
-          <h2>Total price: {{totalPrice}}</h2>
+          <h2>Total price: {{ totalPrice }}</h2>
         </div>
       </mat-card>
 
       <!-- Filters -->
-      <mat-card *ngIf="!formData">
-        <h3>Filters</h3>
-      </mat-card>
+      <div *ngIf="currentStep === 1">
+        <mat-form-field class="element">
+          <mat-label>Sort by</mat-label>
+          <mat-select [formControl]="sortControl" [disabled]="false">
+            <mat-option value="name">Name</mat-option>
+            <mat-option value="price">Price</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-card>
+          <mat-checkbox [formControl]="filterControl" class="example-margin"
+            >Only available</mat-checkbox
+          >
+        </mat-card>
+      </div>
 
       <!-- Testing button for displaying forms values -->
       <button (click)="onTest()">Test</button>

@@ -19,7 +19,7 @@
       <p>{{ car.description }}</p>
       <h3>{{ car.price }} $ per day</h3>
 
-      <button (click)="onNext(car.name, car.price)">Book</button>
+      <button [disabled]="!car.available" (click)="onNext(car.name, car.price)">Book</button>
     </mat-card>
 
     <!-- <mat-form-field class="element">

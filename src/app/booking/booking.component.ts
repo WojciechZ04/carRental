@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Router,
-  NavigationEnd,
-  NavigationStart,
-} from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { BookingService } from './booking.service';
 import { FormDirtyService } from '../services/form-dirty.service';
 import { DataStorageService } from '../shared/data-storage.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -19,6 +16,8 @@ export class BookingComponent implements OnInit {
   formData: any;
   totalPrice: number;
   cars: any;
+  sortControl = new FormControl('');
+  filterControl = new FormControl(false);
 
   constructor(
     private router: Router,
@@ -34,7 +33,13 @@ export class BookingComponent implements OnInit {
       this.formData = formData;
     });
 
+    this.sortControl.valueChanges.subscribe((selectedOption) => {
+      this.dataStorageService.selectedOption.next(selectedOption);
+    });
 
+    this.filterControl.valueChanges.subscribe((isChecked) => {
+      this.dataStorageService.availabilityFilter.next(isChecked);
+    });
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -57,7 +62,8 @@ export class BookingComponent implements OnInit {
           this.totalPrice = this.bookingService.formData.carSelection.price;
         } else if (event.urlAfterRedirects.includes('contact-details')) {
           this.currentStep = 3;
-          this.totalPrice = this.totalPrice + this.bookingService.formData.extras.totalPrice;
+          this.totalPrice =
+            this.totalPrice + this.bookingService.formData.extras.totalPrice;
         } else if (event.urlAfterRedirects.includes('payment')) {
           this.currentStep = 4;
         }
@@ -73,7 +79,9 @@ export class BookingComponent implements OnInit {
 
   canDeactivate(): boolean {
     if (this.formDirtyService.isDirty) {
-      return window.confirm('You have unsaved changes. Are you sure you want to abandon the booking?');
+      return window.confirm(
+        'You have unsaved changes. Are you sure you want to abandon the booking?'
+      );
     }
     return true;
   }
