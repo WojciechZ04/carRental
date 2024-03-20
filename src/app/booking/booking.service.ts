@@ -5,7 +5,12 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class BookingService {
-  steps = ['car-selection', 'extras', 'contact-details', 'payment']; // Add as many steps as you have
+  steps = [
+    { route: 'car-selection', name: '1. Select car' },
+    { route: 'extras', name: '2. Choose extras' },
+    { route: 'contact-details', name: '3. Fill contact form' },
+    { route: 'payment', name: '4. Pay' }
+  ]; // Add as many steps as you have
 
   private formSubmitSource = new Subject<any>();
   formSubmit$ = this.formSubmitSource.asObservable();

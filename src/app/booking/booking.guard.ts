@@ -12,7 +12,7 @@ export class BookingGuard implements CanActivate {
   constructor(private bookingService: BookingService) {}
 
   canActivate(next: ActivatedRouteSnapshot): boolean {
-    const step = next.url[0].path;
+    const step = next.url[0].path;    
     return this.bookingService.canNavigateToStep(step);
   }
 }

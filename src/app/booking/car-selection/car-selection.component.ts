@@ -13,8 +13,8 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 export class CarSelectionComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<FormGroup>();
   currentSortOption: string;
-  data: any;
-  originalData: any;
+  data: any = [];
+  originalData: any = [];
 
   carSelectionForm = new FormGroup({
     start: new FormControl('', Validators.required),
@@ -35,7 +35,7 @@ export class CarSelectionComponent implements OnInit {
     this.dataStorageService.getCars().subscribe(
       (data) => {
         this.data = data;
-        this.originalData = data;
+        this.originalData = [...data];
       },
       (error) => {
         console.error('Error:', error);

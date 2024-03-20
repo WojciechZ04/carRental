@@ -55,14 +55,16 @@
       <!-- Testing button for displaying forms values -->
       <button (click)="onTest()">Test</button>
     </div>
+
+    <!-- Stepper -->
     <div class="col-md-8 test">
       <ul class="stepper">
         <li
           *ngFor="let step of steps; index as i"
-          [routerLink]="['/booking', step]"
+          [routerLink]="['/booking', step.route]"
           routerLinkActive="active"
         >
-          {{ step }}
+          {{ step.name }}
         </li>
       </ul>
       <router-outlet></router-outlet>
