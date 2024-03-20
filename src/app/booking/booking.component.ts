@@ -59,7 +59,9 @@ export class BookingComponent implements OnInit {
           this.currentStep = 1;
         } else if (event.urlAfterRedirects.includes('extras')) {
           this.currentStep = 2;
-          this.totalPrice = this.bookingService.formData.carSelection.price;
+          const days = this.calculateDateDifference(this.bookingService.formData.carSelection.start, this.bookingService.formData.carSelection.end);
+          console.log('Days:', days);
+          this.totalPrice = this.bookingService.formData.carSelection.price * days;
         } else if (event.urlAfterRedirects.includes('contact-details')) {
           this.currentStep = 3;
           this.totalPrice =
@@ -75,6 +77,9 @@ export class BookingComponent implements OnInit {
     if (storedStep) {
       this.currentStep = Number(storedStep);
     }
+
+    console.log('Current Step:', this.currentStep);
+    
   }
 
   canDeactivate(): boolean {
@@ -88,5 +93,12 @@ export class BookingComponent implements OnInit {
 
   onTest() {
     console.log(this.bookingService.formData);
+    console.log(this.bookingService.formData.carSelection.start);
+  }
+
+  calculateDateDifference(start: Date, end: Date) {
+    const differenceInMiliseconds = end.getTime() - start.getTime();
+    const differenceInDays = differenceInMiliseconds / (1000 * 60 * 60 * 24);
+    return differenceInDays + 1;
   }
 }
