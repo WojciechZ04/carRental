@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Router,
-  NavigationEnd,
-  NavigationStart,
-} from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { BookingService } from './booking.service';
 import { FormDirtyService } from '../services/form-dirty.service';
+import { DataStorageService } from '../shared/data-storage.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -14,23 +11,34 @@ import { FormDirtyService } from '../services/form-dirty.service';
   styleUrls: ['./booking.component.css'],
 })
 export class BookingComponent implements OnInit {
+  steps: any;
   currentStep = 0;
   formData: any;
-
-  handleFormSubmit(form: FormGroup) {
-    this.formData = form.value;
-    console.log(form.value);
-  }
+  totalPrice: number;
+  cars: any;
+  sortControl = new FormControl('');
+  filterControl = new FormControl(false);
 
   constructor(
     private router: Router,
     private bookingService: BookingService,
-    private formDirtyService: FormDirtyService
+    private formDirtyService: FormDirtyService,
+    private dataStorageService: DataStorageService
   ) {}
 
   ngOnInit() {
+    this.steps = this.bookingService.steps;
+
     this.bookingService.formSubmit$.subscribe((formData) => {
       this.formData = formData;
+    });
+
+    this.sortControl.valueChanges.subscribe((selectedOption) => {
+      this.dataStorageService.selectedOption.next(selectedOption);
+    });
+
+    this.filterControl.valueChanges.subscribe((isChecked) => {
+      this.dataStorageService.availabilityFilter.next(isChecked);
     });
 
     this.router.events.subscribe((event) => {
@@ -51,8 +59,16 @@ export class BookingComponent implements OnInit {
           this.currentStep = 1;
         } else if (event.urlAfterRedirects.includes('extras')) {
           this.currentStep = 2;
+          const days = this.calculateDateDifference(
+            this.bookingService.formData.carSelection.start,
+            this.bookingService.formData.carSelection.end
+          );
+          this.totalPrice =
+            this.bookingService.formData.carSelection.price * days;
         } else if (event.urlAfterRedirects.includes('contact-details')) {
           this.currentStep = 3;
+          this.totalPrice =
+            this.totalPrice + this.bookingService.formData.extras.totalPrice;
         } else if (event.urlAfterRedirects.includes('payment')) {
           this.currentStep = 4;
         }
@@ -68,12 +84,21 @@ export class BookingComponent implements OnInit {
 
   canDeactivate(): boolean {
     if (this.formDirtyService.isDirty) {
-      return window.confirm('You have unsaved changes. Are you sure you want to abandon the booking?');
+      return window.confirm(
+        'You have unsaved changes. Are you sure you want to abandon the booking?'
+      );
     }
     return true;
   }
 
   onTest() {
     console.log(this.bookingService.formData);
+    console.log(this.bookingService.formData.carSelection.start);
+  }
+
+  calculateDateDifference(start: Date, end: Date) {
+    const differenceInMiliseconds = end.getTime() - start.getTime();
+    const differenceInDays = differenceInMiliseconds / (1000 * 60 * 60 * 24);
+    return differenceInDays + 1;
   }
 }

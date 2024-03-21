@@ -2,31 +2,71 @@
   <h2>Booking</h2>
   <div class="row">
     <div class="test col-md-4">
-      <mat-card>
+      <!-- Booking summary -->
+      <mat-card *ngIf="formData">
         <h3>Booking summary</h3>
         <div *ngIf="formData?.carSelection">
           <h4>Pick up</h4>
-          <p>{{formData?.carSelection.start | date: 'short'}}</p>
+          <p>{{ formData?.carSelection.start | date : "short" }}</p>
           <p>Warsaw</p>
+
+          <h4>Drop off</h4>
+          <p>{{ formData?.carSelection.end | date : "short" }}</p>
+          <p>Warsaw</p>
+
+          <h4>Car</h4>
+          <p>{{ formData?.carSelection.car }}</p>
         </div>
         <div *ngIf="formData?.extras">
           <h4>Extras</h4>
           <ul>
-            <li *ngFor="let extra of formData.extras | keyvalue">
-              <span *ngIf="extra.value">{{ extra.key }}</span>
-            </li>
+            <ng-container *ngFor="let extra of formData.extras | keyvalue">
+              <li *ngIf="extra.value">{{ extra.key }}</li>
+            </ng-container>
           </ul>
         </div>
         <div *ngIf="formData?.contactDetails">
           <h4>Contact</h4>
-          <p>{{formData?.contactDetails.firstName}}</p>
+          <p>{{ formData?.contactDetails.firstName }}</p>
+        </div>
+
+        <div>
+          <h2>Total price: {{ totalPrice }}</h2>
         </div>
       </mat-card>
+
+      <!-- Filters -->
+      <div *ngIf="currentStep === 1">
+        <mat-form-field class="element">
+          <mat-label>Sort by</mat-label>
+          <mat-select [formControl]="sortControl" [disabled]="false">
+            <mat-option value="name">Name</mat-option>
+            <mat-option value="price">Price</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-card>
+          <mat-checkbox [formControl]="filterControl" class="example-margin"
+            >Only available</mat-checkbox
+          >
+        </mat-card>
+      </div>
+
+      <!-- Testing button for displaying forms values -->
       <button (click)="onTest()">Test</button>
     </div>
 
+    <!-- Stepper -->
     <div class="col-md-8 test">
-      <div>Step {{ currentStep }}</div>
+      <ul class="stepper">
+        <li
+          *ngFor="let step of steps; index as i"
+          [routerLink]="['/booking', step.route]"
+          routerLinkActive="active"
+        >
+          {{ step.name }}
+        </li>
+      </ul>
       <router-outlet></router-outlet>
     </div>
   </div>

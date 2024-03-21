@@ -7,6 +7,7 @@ import { ContactDetailsComponent } from "./contact-details/contact-details.compo
 import { ExtrasComponent } from "./extras/extras.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { canDeactivateGuard } from "../guards/can-deactivate.guard";
+import { BookingGuard } from "./booking.guard";
 
 const routes: Routes = [
   {
@@ -14,10 +15,10 @@ const routes: Routes = [
 	component: BookingComponent,
 	canDeactivate: [canDeactivateGuard],
 	children: [
-	  { path: "car-selection", component: CarSelectionComponent },
-	  { path: "extras", component: ExtrasComponent },
-	  { path: "contact-details", component: ContactDetailsComponent },
-	  { path: "payment", component: PaymentComponent },
+	  { path: "car-selection", component: CarSelectionComponent, canActivate: [BookingGuard] },
+	  { path: "extras", component: ExtrasComponent, canActivate: [BookingGuard] },
+	  { path: "contact-details", component: ContactDetailsComponent, canActivate: [BookingGuard] },
+	  { path: "payment", component: PaymentComponent, canActivate: [BookingGuard] },
 	  { path: "", redirectTo: "car-selection", pathMatch: "full" },
 	],
   },

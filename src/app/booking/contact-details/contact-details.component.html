@@ -2,9 +2,32 @@
   <form [formGroup]="contactForm" (ngSubmit)="onNext()">
     <div class="form-group">
       <label for="firstName"></label>
-      <input type="text" id="firstName" formControlName="firstName" placeholder="First name" />
+      <input
+        type="text"
+        id="firstName"
+        formControlName="firstName"
+        placeholder="First name"
+      />
     </div>
     <button (click)="onBack()">Back</button>
+
+    <mat-radio-group formControlName="paymentMethod">
+      <mat-card>
+        <label>
+          <h3>Paypal</h3>
+          <mat-radio-button value="paypal"></mat-radio-button>
+          <img src="https://zaplac.one/wp-content/uploads/2021/03/paypal.png" alt="">
+        </label>
+      </mat-card>
+      <mat-card>
+        <label>
+          <h3>Blik</h3>
+          <mat-radio-button value="creditCard"></mat-radio-button>
+          <img src="https://www.aliorbank.pl/dam/jcr:5950c2d4-7908-47b8-bd57-0229b44b4901/blik.png" alt="">
+        </label>
+      </mat-card>
+    </mat-radio-group>
+
     <button [disabled]="!contactForm.valid" type="submit">Next</button>
   </form>
 </div>

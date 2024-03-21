@@ -4,8 +4,6 @@ import { FormArray, FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { BookingService } from '../booking.service';
 import { FormDirtyService } from '../../services/form-dirty.service';
 
-
-
 @Component({
   selector: 'app-extras',
   templateUrl: './extras.component.html',
@@ -18,11 +16,13 @@ export class ExtrasComponent implements OnInit {
       name: 'Option 1',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra.',
+      price: 100,
     },
     {
       name: 'Option 2',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra.',
+      price: 200,
     },
   ];
 
@@ -40,6 +40,8 @@ export class ExtrasComponent implements OnInit {
     });
 
     this.extrasForm = this.formBuilder.group(group);
+    const groupWithTotalPrice = { ...group, totalPrice: [0] };
+    this.extrasForm = this.formBuilder.group(groupWithTotalPrice);
 
     // If the form data is available, populate the form with the data
     if (this.bookingService.formData.extras) {
@@ -52,6 +54,14 @@ export class ExtrasComponent implements OnInit {
   }
   onNext() {
     if (this.extrasForm.valid) {
+      let totalPrice = 0;
+      console.log('Total Price Before: ', totalPrice);
+      this.extras.forEach((extra) => {
+        if (this.extrasForm.get(extra.name).value) {
+          totalPrice += extra.price;
+        }
+      });
+      this.extrasForm.get('totalPrice').setValue(totalPrice);
       this.bookingService.formSubmitted('extras', this.extrasForm);
       this.router.navigate(['../contact-details'], { relativeTo: this.route });
     }
