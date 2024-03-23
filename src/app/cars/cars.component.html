@@ -1,1 +1,8 @@
-<p>cars works!</p>
+<div class="container top">
+	<h2>Cars</h2>
+	<mat-card *ngFor="let car of data">
+		<h4>{{ car.name }}</h4>
+		<p>{{ car.description }}</p>
+		<h3>{{ car.price }} $ per day</h3>
+	  </mat-card>
+</div>

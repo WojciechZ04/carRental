@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { MatCardModule } from '@angular/material/card';
 
 import { CarsComponent } from "./cars.component";
 
@@ -8,6 +9,7 @@ import { CarsComponent } from "./cars.component";
 	declarations: [CarsComponent],
 	imports: [
 		CommonModule,
+		MatCardModule,
 		RouterModule.forChild([
 			{ path: '', component: CarsComponent }
 		])

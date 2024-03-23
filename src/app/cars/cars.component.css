@@ -1,0 +1,9 @@
+.top {
+	margin-top: 200px;
+}
+
+mat-card {
+	color: black;
+	margin: 1rem;
+	padding: 1rem;
+}
