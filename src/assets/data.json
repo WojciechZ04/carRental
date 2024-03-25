@@ -3,24 +3,57 @@
     "name": "Lamborghini Aventador",
     "price": 100,
     "description": "The Lamborghini Aventador is a mid-engine sports car produced by the Italian automotive manufacturer Lamborghini.",
-    "available": true
+    "details": {
+      "engine": "6.5L V12",
+      "fuel": "Petrol",
+      "power": "700",
+      "topspeed": "350",
+      "transmission": "automatic",
+      "type": "supercar"
+    },
+    "available": true,
+    "imageUrl": "https://v.wpimg.pl/NDk1My5qYSUKUztKGgpsMEkLbxBcU2JmHhN3WxpIfXwTBH9BGhxgJR5FIhJAHTpqG11iFVQcLCsZViUQWxhjJR1UIw1UFSE2RkQhVAFDKHBSBH5XXwEpZhY"
   },
   {
     "name": "Ferrari 458",
     "price": 120,
     "description": "The Ferrari 458 Italia is a mid-engine sports car produced by the Italian automobile manufacturer Ferrari.",
+    "details": {
+      "engine": "6.5L V12",
+      "fuel": "Petrol",
+      "power": "700",
+      "topspeed": "350",
+      "transmission": "automatic",
+      "type": "supercar"
+    },
     "available": true
   },
   {
     "name": "Porshe 911",
     "price": 90,
     "description": "The Porsche 911 (pronounced Nine Eleven or in German: Neunelfer) is a two-door, 2+2 high performance rear-engined sports car.",
+    "details": {
+      "engine": "6.5L V12",
+      "fuel": "Petrol",
+      "power": "700",
+      "topspeed": "350",
+      "transmission": "automatic",
+      "type": "supercar"
+    },
     "available": false
   },
   {
     "name": "Koenigsegg Agera",
     "price": 150,
     "description": "The Koenigsegg Agera is a mid-engine sports car produced by the Swedish automotive manufacturer Koenigsegg.",
+    "details": {
+      "engine": "6.5L V12",
+      "fuel": "Petrol",
+      "power": "700",
+      "topspeed": "350",
+      "transmission": "automatic",
+      "type": "supercar"
+    },
     "available": true
   }
 ]

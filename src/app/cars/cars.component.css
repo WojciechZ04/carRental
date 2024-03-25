@@ -2,8 +2,29 @@
 	margin-top: 200px;
 }
 
-mat-card {
-	color: black;
-	margin: 1rem;
-	padding: 1rem;
+.filters {
+	display: flex;
+	justify-content: center;
 }
+
+.cars {
+	display: flex;
+	margin: 1rem;
+}
+
+.details {
+	flex: 1;
+	padding: 2rem;
+	text-align: center;
+	background-color: darkgray;
+}
+
+.image {
+	flex: 1;
+}
+
+img {
+	width: 100%;
+}
+
+
