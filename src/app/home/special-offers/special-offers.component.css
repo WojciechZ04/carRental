@@ -1,25 +1,63 @@
-.row {
-	margin-bottom: 400px;
-}
 
 .specialCard {
-	padding: 0;
-	position: absolute; 
-    z-index: 1; 
+	    z-index: 1; 
     background-size: cover; 
     background-position: center; 
     height: 50vh; 
 	width: 50%;
-    display: inline; 
 	transition: width 0.7s, filter 0.7s;
 }
+.gallery {
+	--z: 32px; /* control the zig-zag  */
+	--s: 360px; /* control the size */
+	--g: 0px; /* control the gap */
+
+	display: grid;
+	gap: var(--g);
+	/* width: calc(2 * var(--s) + var(--g)); */
+	grid-auto-flow: column;
+  }
+  .gallery > .specialCard {
+	width: 0;
+	min-width: calc(100% + var(--z) / 2);
+	height: var(--s);
+	object-fit: cover;
+	-webkit-mask: var(--mask);
+	mask: var(--mask);
+	cursor: pointer;
+	transition: 0.5s;
+  }
+  .gallery > .specialCard:hover {
+	width: calc(var(--s) / 2);
+  }
+  .gallery > .specialCard:first-child {
+	place-self: start;
+	--mask: conic-gradient(
+		from -135deg at right,
+		#0000,
+		#000 1deg 89deg,
+		#0000 90deg
+	  )
+	  50%/100% calc(2 * var(--z)) repeat;
+  }
+  .gallery > .specialCard:last-child {
+	place-self: end;
+	--mask: conic-gradient(
+		from 45deg at left,
+		#0000,
+		#000 1deg 89deg,
+		#0000 90deg
+	  )
+	  50% calc(50% - var(--z)) / 100% calc(2 * var(--z)) repeat-y;
+  }
+
 
 .specialCard:nth-child(1) {
-	left: 0; 
+	left: 0;
 	background-image: url('https://www.autocentrum.pl/MmYyLmpwYgw4GzpeXwxvGHtDbkIRFGALMBUpQhMWP0AvHD4eGRgjQmwaKFRGQysLOk54D0NCfg44SHxbFUUrX3cTPApSCg');
 }
 .specialCard:nth-child(2) {
-	right: 0; 
+	right: 0;
 	background-image: url('https://is-ak.bnm.pl/04/o/o/31/5170207.jpg?v=1689773126');
 }
 .specialCard:nth-child(3) {
@@ -28,10 +66,6 @@
 	background-image: url('https://is-ak.bnm.pl/04/o/o/31/5170207.jpg?v=1689773126');
 }
 
-.specialCard img {
-	height: 700px;
-	position: absolute;
-}
 
 .hidden {
 	display: none;
@@ -42,11 +76,9 @@
 }
 
 .container:hover .specialCard {
-    width: 30%; /* Shrink all cards on hover */
     filter: brightness(30%); /* Darken all cards on hover */
 }
 
 .container:hover .specialCard:hover {
-    width: 70%; /* Expand hovered card on hover */
     filter: brightness(100%); /* Brighten hovered card on hover */
 }
