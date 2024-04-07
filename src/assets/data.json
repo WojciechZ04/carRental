@@ -26,7 +26,8 @@
       "transmission": "automatic",
       "type": "supercar"
     },
-    "available": true
+    "available": true,
+    "imageUrl": "https://cdn.go-racing.pl/cdn-cgi/image/w=740,h=493,fit=cover,f=auto/https://media.go-racing.pl/media/b9/50/a6/1710538460/eba7d7a20b258b7c5649f41bc08dd3eb.jpeg"
   },
   {
     "name": "Porshe 911",
@@ -40,7 +41,8 @@
       "transmission": "automatic",
       "type": "supercar"
     },
-    "available": false
+    "available": false,
+    "imageUrl": "https://www.autocar.co.uk/sites/autocar.co.uk/files/1-porsche-911-2019-rt-hero-front.jpg"
   },
   {
     "name": "Koenigsegg Agera",
@@ -54,6 +56,7 @@
       "transmission": "automatic",
       "type": "supercar"
     },
-    "available": true
+    "available": true,
+    "imageUrl": "https://images.wsj.net/im-130512/8SR"
   }
 ]
