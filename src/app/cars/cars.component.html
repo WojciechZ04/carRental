@@ -20,25 +20,38 @@
     </div>
   </div>
 
-  <div class="cars" *ngFor="let car of data">
+  <div class="cars" *ngFor="let car of displayedData">
     <div class="details">
-		<h4>{{ car.name }}</h4>
-		<div class="row">
-			<div class="col-6">
-				<p>[icon] {{ car.details.engine }}</p>
-				<p>{{ car.details.fuel }}</p>
-				<p>{{ car.details.power }} HP</p>
-			</div>
-			<div class="col-6">
-				<p>{{ car.details.topspeed }} km/h</p>
-				<p>{{ car.details.transmission }}</p>
-				<p>{{ car.details.type }}</p>
-			</div>
-		</div>
-    <h5>Price: {{ car.price }} $ per day</h5>
-	</div>
-	<div class="image">
-		<img [src]="car.imageUrl" alt="">
-	</div>
+      <h4>{{ car.name }}</h4>
+      <div class="row">
+        <div class="col-6">
+          <p>[icon] {{ car.details.engine }}</p>
+          <p>{{ car.details.fuel }}</p>
+          <p>{{ car.details.power }} HP</p>
+        </div>
+        <div class="col-6">
+          <p>{{ car.details.topspeed }} km/h</p>
+          <p>{{ car.details.transmission }}</p>
+          <p>{{ car.details.type }}</p>
+        </div>
+      </div>
+      <h5>Price: {{ car.price }} $ per day</h5>
+    </div>
+    <div class="image">
+      <img [src]="car.imageUrl" alt="" />
+    </div>
   </div>
+
+  <mat-paginator
+    #paginator
+    class="demo-paginator"
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [hidePageSize]="true"
+    [pageIndex]="pageIndex"
+    aria-label="Select page"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
 </div>
