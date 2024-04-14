@@ -25,14 +25,19 @@
       <h4>{{ car.name }}</h4>
       <div class="row">
         <div class="col-6">
-          <p>[icon] {{ car.details.engine }}</p>
-          <p>{{ car.details.fuel }}</p>
-          <p>{{ car.details.power }} HP</p>
+          <div>
+            <p>
+              <mat-icon fontIcon="directions_car"></mat-icon>
+              {{ car.details.engine }}
+            </p>
+          </div>
+          <p><mat-icon fontIcon="local_gas_station"></mat-icon>{{ car.details.fuel }}</p>
+          <p><mat-icon fontIcon="bolt"></mat-icon>{{ car.details.power }} HP</p>
         </div>
         <div class="col-6">
-          <p>{{ car.details.topspeed }} km/h</p>
-          <p>{{ car.details.transmission }}</p>
-          <p>{{ car.details.type }}</p>
+          <p><mat-icon fontIcon="speed"></mat-icon>{{ car.details.topspeed }} km/h</p>
+          <p><mat-icon fontIcon="gear"></mat-icon>{{ car.details.transmission }}</p>
+          <p><mat-icon fontIcon="directions_car"></mat-icon>{{ car.details.type }}</p>
         </div>
       </div>
       <h5>Price: {{ car.price }} $ per day</h5>
